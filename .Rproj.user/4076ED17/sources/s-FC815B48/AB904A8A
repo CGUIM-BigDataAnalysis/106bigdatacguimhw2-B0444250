@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527432147245.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AB904A8A",
+    "lastKnownWriteTime" : 13229817834242158,
+    "last_content_update" : 1527432147245,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "6A03010E",
+        "caption" : "df_pop_country",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=df_pop_country&cache_key=6A03010E",
+        "displayedObservations" : 166,
+        "environment" : "",
+        "object" : "df_pop_country",
+        "preview" : 0,
+        "totalObservations" : 166,
+        "variables" : 2
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

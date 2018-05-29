@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527433239690.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D3E4D9EF",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1527433239690,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "827D9DA1",
+        "caption" : "CountriesComparisionTable",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=CountriesComparisionTable&cache_key=827D9DA1",
+        "displayedObservations" : "273",
+        "environment" : "",
+        "object" : "CountriesComparisionTable",
+        "preview" : "0",
+        "totalObservations" : "273",
+        "variables" : "3"
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

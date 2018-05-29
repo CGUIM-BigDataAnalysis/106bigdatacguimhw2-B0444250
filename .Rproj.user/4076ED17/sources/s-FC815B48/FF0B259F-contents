@@ -1,0 +1,92 @@
+library(readr)
+library(dplyr)
+
+out103<-read_csv("https://quality.data.gov.tw/dq_download_csv.php?nid=6289&md5_url=25f64d5125016dcd6aed42e50c972ed0")
+out104<-read_csv("https://quality.data.gov.tw/dq_download_csv.php?nid=6289&md5_url=4d3e9b37b7b0fd3aa18a388cdbc77996")
+out105<-read_csv("https://quality.data.gov.tw/dq_download_csv.php?nid=6289&md5_url=19bedf88cf46999da12513de755c33c6")
+out106<-read_csv("https://quality.data.gov.tw/dq_download_csv.php?nid=6289&md5_url=50e3370f9f8794f2054c0c82a2ed8c91")
+
+
+out103$total<-rowSums(out103[,3:11],na.rm = T)
+out104$total<-rowSums(out104[,3:11],na.rm = T)
+out105$total<-rowSums(out105[,3:11],na.rm = T)
+out106$total<-rowSums(out106[,3:11],na.rm = T)
+
+total<-merge(select(out103,"國別",total),
+             select(out104,"國別",total),
+             "國別")
+total<-merge(total,
+             select(out105,"國別",total),
+             "國別")
+total<-merge(total,
+             select(out106,"國別",total),
+             "國別")
+
+names(total)<-c("國別","103","104","105","106")
+
+total<-total%>%
+  mutate(totalpeople = rowSums(total[,2:5]))%>%
+  select("國別",totalpeople)
+  arrange(desc(totalpeople))%>%
+  head(10)
+
+s103<-read_csv("https://quality.data.gov.tw/dq_download_csv.php?nid=6289&md5_url=a6d1469f39fe41fb81dbfc373aef3331")
+s104<-read_csv("https://quality.data.gov.tw/dq_download_csv.php?nid=6289&md5_url=8baeae81cba74f35cf0bb1333d3d99f5")
+s105<-read_csv("https://quality.data.gov.tw/dq_download_csv.php?nid=6289&md5_url=1a485383cf9995da679c3798ab4fd681")
+s106<-read_csv("https://quality.data.gov.tw/dq_download_csv.php?nid=6289&md5_url=883e2ab4d5357f70bea9ac44a47d05cc")
+
+s103$`非學位生-大陸研修生`<-as.numeric(gsub("…",NA,s103$`非學位生-大陸研修生`))
+s104$`非學位生-大陸研修生`<-as.numeric(gsub("…",NA,s104$`非學位生-大陸研修生`))
+
+s103$total<-rowSums(s103[,4:12],na.rm = T)
+s104$total<-rowSums(s104[,4:12],na.rm = T)
+s105$total<-rowSums(s105[,4:12],na.rm = T)
+s106$total<-rowSums(s106[,4:12],na.rm = T)
+
+sMerge<-merge(select(s103,"學校名稱",total),
+              select(s104,"學校名稱",total),
+              "學校名稱")
+sMerge<-merge(sMerge,
+              select(s105,"學校名稱",total),
+              "學校名稱")
+sMerge<-merge(sMerge,
+              select(s106,"學校名稱",total),
+              "學校名稱")
+
+names(sMerge)<-c("學校名稱","103","104","105","106")
+
+sMerge<-sMerge%>%
+  mutate(totalpeople = rowSums(sMerge[,2:5]))%>%
+  select("學校名稱",totalpeople)%>%
+  arrange(desc(totalpeople))%>%
+  head(10)
+
+library(ggplot2)
+ggplot()+
+  geom_bar(data = total,
+           aes(x=國別,y=totalpeople),
+           stat = "identity")
+
+library(choroplethr)
+
+data("df_pop_country")
+names(total)<-c("Taiwan","people")
+newTotal<-merge(CountriesComparisionTable,total,"Taiwan")
+newTotal<-select(newTotal,English,people)
+newTotal<-group_by(newTotal,English)%>%
+  summarise(people=sum(people))
+newTotal<-newTotal[-120,]
+names(newTotal)<-c("region","value")
+country_choropleth(newTotal)
+
+
+
+Student_RPT_07<-iconv(Student_RPT_07,from = "UTF-8",to = "big5")
+
+
+
+
+
+
+our<-read_csv("https://ws.moe.edu.tw/Download.ashx?u=C099358C81D4876CC7586B178A6BD6D5062C39FB76BDE7EC7685C1A3C0846BCDD2B4F4C2FE907C3E7E96F97D24487065577A728C59D4D9A4ECDFF432EA5A114C8B01E4AFECC637696DE4DAECA03BB417&n=4E402A02CE6F0B6C1B3C7E89FDA1FAD0B5DDFA6F3DA74E2DA06AE927F09433CFBC07A1910C169A1845D8EB78BD7D60D7414F74617F2A6B71DC86D17C9DA3781394EF5794EEA7363C&icon=..csv")
+
